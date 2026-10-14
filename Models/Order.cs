@@ -1,0 +1,30 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace OrderHub.Models;
+
+public enum OrderStatus { Pending, Paid, Cancelled }
+
+public class Order
+{
+    public int Id { get; set; }
+
+    [Required, StringLength(60)]
+    [Display(Name = "Customer")]
+    public string CustomerName { get; set; } = "";
+
+    [Required, StringLength(80)]
+    public string Product { get; set; } = "";
+
+    [Range(1, 1000)]
+    public int Quantity { get; set; } = 1;
+
+    [Range(0.01, 1000000)]
+    [Display(Name = "Unit price")]
+    public decimal UnitPrice { get; set; }
+
+    public decimal Total => Quantity * UnitPrice;
+
+    public OrderStatus Status { get; set; } = OrderStatus.Pending;
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+}

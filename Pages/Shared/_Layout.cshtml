@@ -1,0 +1,34 @@
+@{
+    var path = Context.Request.Path.Value ?? "/";
+    string Active(string prefix) => (prefix == "/" ? path == "/" : path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · OrderHub</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/">Order<span>Hub</span></a>
+        <nav>
+            <a class="@Active("/")" href="/">Dashboard</a>
+            <a class="@Active("/Orders")" href="/Orders">Orders</a>
+            <a class="@Active("/Payments")" href="/Payments">Payments</a>
+        </nav>
+    </header>
+    <main class="container">
+        @if (TempData["Message"] is string msg)
+        {
+            <div class="alert ok">@msg</div>
+        }
+        @if (TempData["Error"] is string err)
+        {
+            <div class="alert err">@err</div>
+        }
+        @RenderBody()
+    </main>
+</body>
+</html>

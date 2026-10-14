@@ -1,0 +1,47 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "Dashboard"; }
+
+<h1>Dashboard</h1>
+
+<section class="cards">
+    <div class="card"><span>Total orders</span><strong>@Model.Stats.TotalOrders</strong></div>
+    <div class="card warn"><span>Pending</span><strong>@Model.Stats.PendingOrders</strong>
+        <small>@Model.Stats.OutstandingAmount.ToString("C") outstanding</small></div>
+    <div class="card good"><span>Paid</span><strong>@Model.Stats.PaidOrders</strong></div>
+    <div class="card accent"><span>Revenue</span><strong>@Model.Stats.Revenue.ToString("C")</strong></div>
+</section>
+
+<div class="grid2">
+    <section class="panel">
+        <div class="panel-head"><h2>Recent orders</h2><a href="/Orders">View all</a></div>
+        <table>
+            <tr><th>#</th><th>Customer</th><th>Total</th><th>Status</th></tr>
+            @foreach (var o in Model.Stats.RecentOrders)
+            {
+                <tr><td>@o.Id</td><td>@o.CustomerName</td><td>@o.Total.ToString("C")</td>
+                    <td><span class="badge @o.Status.ToString().ToLower()">@o.Status</span></td></tr>
+            }
+        </table>
+    </section>
+
+    <section class="panel">
+        <div class="panel-head"><h2>Recent payments</h2><a href="/Payments">View all</a></div>
+        <table>
+            <tr><th>Ref</th><th>Order</th><th>Amount</th><th>Method</th></tr>
+            @foreach (var p in Model.Stats.RecentPayments)
+            {
+                <tr><td>@p.Reference</td><td><a href="/Orders">#@p.OrderId</a></td><td>@p.Amount.ToString("C")</td><td>@p.Method</td></tr>
+            }
+            @if (!Model.Stats.RecentPayments.Any())
+            {
+                <tr><td colspan="4" class="muted">No payments yet.</td></tr>
+            }
+        </table>
+    </section>
+</div>
+
+@if (Model.Stats.PendingOrders > 0)
+{
+    <p class="hint">You have @Model.Stats.PendingOrders order(s) waiting for payment. <a href="/Payments">Go to payments →</a></p>
+}

@@ -1,0 +1,38 @@
+@page
+@model OrderHub.Pages.Payments.IndexModel
+@{ ViewData["Title"] = "Payments"; }
+
+<h1>Payments</h1>
+
+<section class="panel">
+    <div class="panel-head"><h2>Awaiting payment</h2></div>
+    <table>
+        <tr><th>Order</th><th>Customer</th><th>Amount due</th><th></th></tr>
+        @foreach (var o in Model.Unpaid)
+        {
+            <tr>
+                <td>#@o.Id · @o.Product</td><td>@o.CustomerName</td><td>@o.Total.ToString("C")</td>
+                <td class="actions"><a class="btn small" href="/Payments/Pay?orderId=@o.Id">Pay now</a></td>
+            </tr>
+        }
+        @if (!Model.Unpaid.Any())
+        {
+            <tr><td colspan="4" class="muted">Nothing to pay. All caught up 🎉</td></tr>
+        }
+    </table>
+</section>
+
+<section class="panel">
+    <div class="panel-head"><h2>Payment history</h2></div>
+    <table>
+        <tr><th>Reference</th><th>Order</th><th>Amount</th><th>Method</th><th>Paid on</th></tr>
+        @foreach (var p in Model.History)
+        {
+            <tr><td>@p.Reference</td><td>#@p.OrderId</td><td>@p.Amount.ToString("C")</td><td>@p.Method</td><td>@p.PaidAt.ToString("dd MMM yyyy HH:mm")</td></tr>
+        }
+        @if (!Model.History.Any())
+        {
+            <tr><td colspan="5" class="muted">No payments yet.</td></tr>
+        }
+    </table>
+</section>

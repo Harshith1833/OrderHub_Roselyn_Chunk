@@ -1,0 +1,31 @@
+@page
+@model OrderHub.Pages.Payments.PayModel
+@{ ViewData["Title"] = "Pay order"; }
+
+<h1>Pay for order #@Model.Order!.Id</h1>
+
+<div class="grid2">
+    <section class="panel">
+        <div class="panel-head"><h2>Order summary</h2></div>
+        <dl class="summary">
+            <dt>Customer</dt><dd>@Model.Order.CustomerName</dd>
+            <dt>Product</dt><dd>@Model.Order.Product</dd>
+            <dt>Quantity</dt><dd>@Model.Order.Quantity × @Model.Order.UnitPrice.ToString("C")</dd>
+            <dt>Total due</dt><dd class="total">@Model.Order.Total.ToString("C")</dd>
+        </dl>
+    </section>
+
+    <form method="post" class="form panel">
+        <input type="hidden" name="OrderId" value="@Model.OrderId" />
+        <div class="panel-head"><h2>Payment method</h2></div>
+        @foreach (var m in Model.Methods)
+        {
+            <label class="radio"><input type="radio" name="Method" value="@m" checked="@(m == "Card")" /> @m</label>
+        }
+        <div class="form-actions">
+            <button class="btn" type="submit">Pay @Model.Order.Total.ToString("C")</button>
+            <a href="/Orders">Back</a>
+        </div>
+        <p class="muted small">Demo only: no real payment is processed.</p>
+    </form>
+</div>
