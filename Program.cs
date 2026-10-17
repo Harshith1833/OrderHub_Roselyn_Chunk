@@ -1,3 +1,7 @@
+// Configures and runs a .NET Core web application using Razor Pages, 
+// registering a thread-safe, shared 'DataStore' as a singleton lifecycle service 
+// to manage state across the Dashboard, Orders, and Payments modules.
+
 using OrderHub.Services;
 
 var builder = WebApplication.CreateBuilder(args);
