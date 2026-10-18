@@ -15,6 +15,8 @@ Open the URL printed in the terminal (usually http://localhost:5000 or 5xxx).
 - **Payments -> Orders**: paying creates a payment record and flips the order to *Paid*. 
 - **Dashboard**: reads from both (order counts by status, revenue from payments, outstanding amount, recent orders/payments).
 
+The Orders page is paged (5 per page).
+
 Data is saved to `App_Data/data.json` (3 sample orders are seeded on first run). Delete that file to reset.
 
 ## Layout

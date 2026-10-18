@@ -48,3 +48,18 @@
     }
 </table>
 </section>
+
+@{
+    var statusQ = Model.Status.HasValue ? "&status=" + Model.Status : "";
+}
+<div class="pager">
+    @if (Model.PageNo > 1)
+    {
+        <a class="btn small" href="/Orders?pageNumber=@(Model.PageNo - 1)@statusQ">&lsaquo; Prev</a>
+    }
+    <span>Page @Model.PageNo of @Model.TotalPages &middot; @Model.TotalCount orders</span>
+    @if (Model.PageNo < Model.TotalPages)
+    {
+        <a class="btn small" href="/Orders?pageNumber=@(Model.PageNo + 1)@statusQ">Next &rsaquo;</a>
+    }
+</div>

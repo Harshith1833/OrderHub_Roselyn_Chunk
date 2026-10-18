@@ -43,6 +43,20 @@ public class DataStore
                 .OrderByDescending(o => o.CreatedAt).ToList();
     }
 
+    public const int OrdersPageSize = 5;
+
+    public (List<Order> items, int total) GetOrdersPage(OrderStatus? status, int page, int pageSize)
+    {
+        lock (_lock)
+        {
+            var all = _data.Orders
+                .Where(o => status == null || o.Status == status || (status == OrderStatus.Paid && o.Status == OrderStatus.Pending))
+                .OrderByDescending(o => o.CreatedAt).ToList();
+            var items = all.Skip((page - 1) * pageSize + 1).Take(pageSize).ToList();
+            return (items, all.Count);
+        }
+    }
+
     public Order? GetOrder(int id)
     {
         lock (_lock) return _data.Orders.FirstOrDefault(o => o.Id == id);
@@ -86,7 +100,6 @@ public class DataStore
         {
             var order = _data.Orders.FirstOrDefault(o => o.Id == orderId);
             if (order == null) return (false, "Order not found.");
-            if (order.Status == OrderStatus.Cancelled) return (false, $"Order #{orderId} is {order.Status}, so it can't be paid.");
             if (!PaymentMethods.Contains(method)) return (false, "Invalid payment method.");
 
             var payment = new Payment
@@ -138,6 +151,15 @@ public class DataStore
             new Order { Id = 1, CustomerName = "Asha Rao",   Product = "Wireless Keyboard", Quantity = 2, UnitPrice = 1499, CreatedAt = now.AddDays(-3) },
             new Order { Id = 2, CustomerName = "Ravi Kumar", Product = "27\" Monitor",      Quantity = 1, UnitPrice = 15999, CreatedAt = now.AddDays(-2) },
             new Order { Id = 3, CustomerName = "Meera Iyer", Product = "USB-C Hub",         Quantity = 3, UnitPrice = 2199, CreatedAt = now.AddDays(-1) },
+            new Order { Id = 4, CustomerName = "Kiran Shah",  Product = "Laptop Stand",      Quantity = 1, UnitPrice = 1799, CreatedAt = now.AddDays(-4) },
+            new Order { Id = 5, CustomerName = "Divya Nair",  Product = "Webcam",            Quantity = 2, UnitPrice = 2999, CreatedAt = now.AddDays(-5) },
+            new Order { Id = 6, CustomerName = "Arjun Menon", Product = "Mouse Pad",         Quantity = 4, UnitPrice = 399,  CreatedAt = now.AddDays(-6) },
+            new Order { Id = 7, CustomerName = "Sneha Patil", Product = "Headphones",        Quantity = 1, UnitPrice = 4599, CreatedAt = now.AddDays(-7) },
+            new Order { Id = 8, CustomerName = "Rohit Verma", Product = "HDMI Cable",        Quantity = 5, UnitPrice = 349,  CreatedAt = now.AddDays(-8) },
+            new Order { Id = 9, CustomerName = "Lakshmi Rao", Product = "Desk Lamp",         Quantity = 2, UnitPrice = 1299, CreatedAt = now.AddDays(-9) },
+            new Order { Id = 10, CustomerName = "Imran Khan",  Product = "External SSD",     Quantity = 1, UnitPrice = 6499, CreatedAt = now.AddDays(-10) },
+            new Order { Id = 11, CustomerName = "Pooja Desai", Product = "Webcam Cover",     Quantity = 6, UnitPrice = 149,  CreatedAt = now.AddDays(-11) },
+            new Order { Id = 12, CustomerName = "Naveen Gowda", Product = "Power Strip",     Quantity = 2, UnitPrice = 899,  CreatedAt = now.AddDays(-12) },
         });
         Save();
         Pay(1, "UPI"); // gives the dashboard some revenue out of the box

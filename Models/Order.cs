@@ -8,9 +8,8 @@ public class Order
 {
     public int Id { get; set; }
 
-    [Required, StringLength(60)]
     [Display(Name = "Customer")]
-    public string CustomerName { get; set; } = "";
+    public string? CustomerName { get; set; } = "";
 
     [Required, StringLength(80)]
     public string Product { get; set; } = "";
