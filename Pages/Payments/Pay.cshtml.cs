@@ -19,7 +19,6 @@ public class PayModel : PageModel
     public IActionResult OnGet(int orderId)
     {
         Order = _store.GetOrder(orderId);
-        if (Order == null) { TempData["Error"] = "Order not found."; return RedirectToPage("/Orders/Index"); }
         if (Order.Status != OrderStatus.Pending)
         {
             TempData["Error"] = $"Order #{orderId} is already {Order.Status}.";

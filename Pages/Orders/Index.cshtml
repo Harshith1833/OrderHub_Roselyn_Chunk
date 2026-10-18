@@ -32,6 +32,9 @@
                 @if (o.Status == OrderStatus.Pending)
                 {
                     <a class="btn small" href="/Payments/Pay?orderId=@o.Id">Pay</a>
+                }
+                @if (o.Status != OrderStatus.Cancelled)
+                {
                     <form method="post" asp-page-handler="Cancel" asp-route-id="@o.Id" style="display:inline">
                         <button class="btn small danger" type="submit">Cancel</button>
                     </form>

@@ -15,7 +15,6 @@ public class Order
     [Required, StringLength(80)]
     public string Product { get; set; } = "";
 
-    [Range(1, 1000)]
     public int Quantity { get; set; } = 1;
 
     [Range(0.01, 1000000)]

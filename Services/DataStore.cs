@@ -39,7 +39,7 @@ public class DataStore
     {
         lock (_lock)
             return _data.Orders
-                .Where(o => status == null || o.Status == status)
+                .Where(o => status == null || o.Status == status || (status == OrderStatus.Paid && o.Status == OrderStatus.Pending))
                 .OrderByDescending(o => o.CreatedAt).ToList();
     }
 
@@ -56,7 +56,6 @@ public class DataStore
             order.Status = OrderStatus.Pending;
             order.CreatedAt = DateTime.Now;
             _data.Orders.Add(order);
-            Save();
             return order;
         }
     }
@@ -68,7 +67,6 @@ public class DataStore
         {
             var order = _data.Orders.FirstOrDefault(o => o.Id == id);
             if (order == null) return (false, "Order not found.");
-            if (order.Status == OrderStatus.Paid) return (false, "Paid orders cannot be cancelled.");
             order.Status = OrderStatus.Cancelled;
             Save();
             return (true, $"Order #{id} cancelled.");
@@ -88,7 +86,7 @@ public class DataStore
         {
             var order = _data.Orders.FirstOrDefault(o => o.Id == orderId);
             if (order == null) return (false, "Order not found.");
-            if (order.Status != OrderStatus.Pending) return (false, $"Order #{orderId} is {order.Status}, so it can't be paid.");
+            if (order.Status == OrderStatus.Cancelled) return (false, $"Order #{orderId} is {order.Status}, so it can't be paid.");
             if (!PaymentMethods.Contains(method)) return (false, "Invalid payment method.");
 
             var payment = new Payment
@@ -114,6 +112,7 @@ public class DataStore
         {
             var paid = _data.Orders.Where(o => o.Status == OrderStatus.Paid).ToList();
             var pending = _data.Orders.Where(o => o.Status == OrderStatus.Pending).ToList();
+            var unpaid = _data.Orders.Where(o => o.Status != OrderStatus.Paid).ToList();
             return new DashboardStats
             {
                 TotalOrders = _data.Orders.Count,
@@ -121,8 +120,8 @@ public class DataStore
                 PaidOrders = paid.Count,
                 CancelledOrders = _data.Orders.Count(o => o.Status == OrderStatus.Cancelled),
                 Revenue = _data.Payments.Sum(p => p.Amount),
-                OutstandingAmount = pending.Sum(o => o.Total),
-                RecentOrders = _data.Orders.OrderByDescending(o => o.CreatedAt).Take(5).ToList(),
+                OutstandingAmount = unpaid.Sum(o => o.Total),
+                RecentOrders = _data.Orders.OrderBy(o => o.CreatedAt).Take(5).ToList(),
                 RecentPayments = _data.Payments.OrderByDescending(p => p.PaidAt).Take(5).ToList()
             };
         }
