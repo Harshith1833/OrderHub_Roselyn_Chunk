@@ -1,6 +1,6 @@
 @{
     var path = Context.Request.Path.Value ?? "/";
-    string Active(string prefix) => (prefix == "/" ? path == "/" : path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) ? "active" : "";
+    string Active(string prefix) => path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) ? "active" : "";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@
         </nav>
     </header>
     <main class="container">
-        @if (TempData["Message"] is string msg)
+        @if (TempData.Peek("Message") is string msg)
         {
             <div class="alert ok">@msg</div>
         }

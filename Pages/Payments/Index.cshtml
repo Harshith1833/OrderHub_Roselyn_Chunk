@@ -28,7 +28,7 @@
         <tr><th>Reference</th><th>Order</th><th>Amount</th><th>Method</th><th>Paid on</th></tr>
         @foreach (var p in Model.History)
         {
-            <tr><td>@p.Reference</td><td>#@p.OrderId</td><td>@p.Amount.ToString("C")</td><td>@p.Method</td><td>@p.PaidAt.ToString("dd MMM yyyy HH:mm")</td></tr>
+            <tr><td>@p.Reference</td><td>#@p.OrderId</td><td>@p.Amount.ToString("C")</td><td>@p.Method</td><td>@p.PaidAt.ToString("dd MMM yyyy hh:mm")</td></tr>
         }
         @if (!Model.History.Any())
         {

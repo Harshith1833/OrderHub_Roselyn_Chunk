@@ -23,7 +23,7 @@ th,td{padding:.6rem .5rem;border-bottom:1px solid var(--line)}tr:last-child td{b
 .actions{white-space:nowrap;text-align:right}
 .muted{color:var(--muted)}.small{font-size:.8rem}
 .badge{padding:.15rem .6rem;border-radius:999px;font-size:.78rem;font-weight:600}
-.badge.pending{background:#fef3c7;color:#92400e}.badge.paid{background:#dcfce7;color:#166534}.badge.cancelled{background:#fee2e2;color:#991b1b}
+.badge.pending{background:#fef3c7;color:#92400e}.badge.paid{background:#dcfce7;color:#166534}.badge.cancelled{background:#dcfce7;color:#166534}
 .btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:8px;padding:.55rem 1rem;font:inherit;font-weight:600;cursor:pointer}
 .btn:hover{filter:brightness(1.08)}.btn.small{padding:.25rem .65rem;font-size:.82rem}.btn.danger{background:var(--bad)}
 .filters{display:flex;gap:.4rem;margin-bottom:1rem}

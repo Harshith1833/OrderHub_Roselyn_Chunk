@@ -20,7 +20,7 @@ public class Order
     [Display(Name = "Unit price")]
     public decimal UnitPrice { get; set; }
 
-    public decimal Total => Quantity * UnitPrice;
+    public decimal Total => Math.Round(Quantity * UnitPrice);
 
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 

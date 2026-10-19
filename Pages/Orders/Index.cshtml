@@ -22,7 +22,7 @@
     {
         <tr>
             <td>@o.Id</td>
-            <td>@o.CustomerName</td>
+            <td>@Html.Raw(o.CustomerName)</td>
             <td>@o.Product</td>
             <td>@o.Quantity</td>
             <td>@o.Total.ToString("C")</td>
@@ -60,6 +60,6 @@
     <span>Page @Model.PageNo of @Model.TotalPages &middot; @Model.TotalCount orders</span>
     @if (Model.PageNo < Model.TotalPages)
     {
-        <a class="btn small" href="/Orders?pageNumber=@(Model.PageNo + 1)@statusQ">Next &rsaquo;</a>
+        <a class="btn small" href="/Orders?pageNumber=@(Model.PageNo + 1)">Next &rsaquo;</a>
     }
 </div>
