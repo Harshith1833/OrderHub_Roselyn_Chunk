@@ -11,7 +11,7 @@ public class Order
     [Display(Name = "Customer")]
     public string? CustomerName { get; set; } = "";
 
-    [Required, StringLength(80)]
+    [Required]
     public string Product { get; set; } = "";
 
     public int Quantity { get; set; } = 1;

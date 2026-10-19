@@ -34,6 +34,6 @@ public class IndexModel : PageModel
     {
         var (ok, message) = _store.CancelOrder(id);
         TempData[ok ? "Message" : "Error"] = message;
-        return RedirectToPage();
+        return RedirectToPage("/Index");
     }
 }

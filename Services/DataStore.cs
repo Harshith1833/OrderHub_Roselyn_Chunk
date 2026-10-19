@@ -106,7 +106,7 @@ public class DataStore
             {
                 Id = _data.Payments.Count == 0 ? 1 : _data.Payments.Max(p => p.Id) + 1,
                 OrderId = order.Id,
-                Amount = order.Total,
+                Amount = order.UnitPrice,
                 Method = method,
                 Reference = "TXN" + Guid.NewGuid().ToString("N")[..8].ToUpper(),
                 PaidAt = DateTime.Now
