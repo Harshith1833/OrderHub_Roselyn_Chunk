@@ -1,0 +1,134 @@
+{
+  "Orders": [
+    {
+      "Id": 1,
+      "CustomerName": "Asha Rao",
+      "Product": "Wireless Keyboard",
+      "Quantity": 2,
+      "UnitPrice": 1499,
+      "Total": 2998,
+      "Status": 1,
+      "CreatedAt": "2026-10-20T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 2,
+      "CustomerName": "Ravi Kumar",
+      "Product": "27\u0022 Monitor",
+      "Quantity": 1,
+      "UnitPrice": 15999,
+      "Total": 15999,
+      "Status": 0,
+      "CreatedAt": "2026-10-21T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 3,
+      "CustomerName": "Meera Iyer",
+      "Product": "USB-C Hub",
+      "Quantity": 3,
+      "UnitPrice": 2199,
+      "Total": 6597,
+      "Status": 0,
+      "CreatedAt": "2026-10-22T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 4,
+      "CustomerName": "Kiran Shah",
+      "Product": "Laptop Stand",
+      "Quantity": 1,
+      "UnitPrice": 1799,
+      "Total": 1799,
+      "Status": 0,
+      "CreatedAt": "2026-10-19T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 5,
+      "CustomerName": "Divya Nair",
+      "Product": "Webcam",
+      "Quantity": 2,
+      "UnitPrice": 2999,
+      "Total": 5998,
+      "Status": 0,
+      "CreatedAt": "2026-10-18T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 6,
+      "CustomerName": "Arjun Menon",
+      "Product": "Mouse Pad",
+      "Quantity": 4,
+      "UnitPrice": 399,
+      "Total": 1596,
+      "Status": 0,
+      "CreatedAt": "2026-10-17T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 7,
+      "CustomerName": "Sneha Patil",
+      "Product": "Headphones",
+      "Quantity": 1,
+      "UnitPrice": 4599,
+      "Total": 4599,
+      "Status": 0,
+      "CreatedAt": "2026-10-16T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 8,
+      "CustomerName": "Rohit Verma",
+      "Product": "HDMI Cable",
+      "Quantity": 5,
+      "UnitPrice": 349,
+      "Total": 1745,
+      "Status": 0,
+      "CreatedAt": "2026-10-15T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 9,
+      "CustomerName": "Lakshmi Rao",
+      "Product": "Desk Lamp",
+      "Quantity": 2,
+      "UnitPrice": 1299,
+      "Total": 2598,
+      "Status": 0,
+      "CreatedAt": "2026-10-14T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 10,
+      "CustomerName": "Imran Khan",
+      "Product": "External SSD",
+      "Quantity": 1,
+      "UnitPrice": 6499,
+      "Total": 6499,
+      "Status": 0,
+      "CreatedAt": "2026-10-13T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 11,
+      "CustomerName": "Pooja Desai",
+      "Product": "Webcam Cover",
+      "Quantity": 6,
+      "UnitPrice": 149,
+      "Total": 894,
+      "Status": 0,
+      "CreatedAt": "2026-10-12T09:24:22.1080699+05:30"
+    },
+    {
+      "Id": 12,
+      "CustomerName": "Naveen Gowda",
+      "Product": "Power Strip",
+      "Quantity": 2,
+      "UnitPrice": 899,
+      "Total": 1798,
+      "Status": 0,
+      "CreatedAt": "2026-10-11T09:24:22.1080699+05:30"
+    }
+  ],
+  "Payments": [
+    {
+      "Id": 1,
+      "OrderId": 1,
+      "Amount": 1499,
+      "Method": "UPI",
+      "Reference": "TXN2475E88A",
+      "PaidAt": "2026-10-23T09:24:22.2178518+05:30"
+    }
+  ]
+}
